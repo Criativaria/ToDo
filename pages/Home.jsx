@@ -1,9 +1,9 @@
-import { Check, PlusCircle, Trash2 } from 'lucide-react-native';
 import styled from 'styled-components/native'
 import NovaTarefa from '../components/novatarefa';
 import { useEffect, useId, useState } from 'react';
 import { FlatList, Modal, Pressable } from 'react-native';
 import usestorage from '../hooks/usestorage';
+
 
 export default function Home() {
     const [openModal, setOpenModal] = useState(false);
@@ -53,7 +53,7 @@ export default function Home() {
                                 <P>{item.nome}</P>
                             </DivNome>
                             <Pressable onPress={() => Delete(item)}>
-                                <Check size={50} strokeWidth={2.5} />
+                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5" /></svg>
                             </Pressable>
                         </Tarefa>
                     }}>
@@ -63,7 +63,7 @@ export default function Home() {
 
 
             <DivPlus onPress={() => setOpenModal(true)}>
-                <PlusCircle size={89} strokeWidth={2.5} />
+                <svg xmlns="http://www.w3.org/2000/svg" width="98" height="98" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-circle"><circle cx="12" cy="12" r="10" /><path d="M8 12h8" /><path d="M12 8v8" /></svg>
             </DivPlus>
         </Wrapper >
     )
@@ -71,8 +71,8 @@ export default function Home() {
 }
 const DivPlus = styled.Pressable`
     position: absolute;
-    bottom: 0;
-    right: 0;
+    bottom: 1rem;
+    right: 1rem;
 `
 
 const DivNome = styled.View`

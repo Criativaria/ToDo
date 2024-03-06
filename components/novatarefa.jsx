@@ -1,5 +1,4 @@
 import styled from 'styled-components/native'
-import { PlusCircle, Trash2, XCircle } from 'lucide-react-native';
 import { useEffect, useId, useState } from 'react';
 import { Modal } from 'react-native-web';
 import NovaCategoria from './novacategoria';
@@ -75,7 +74,7 @@ export default function NovaTarefa({ closeModal }) {
                 <DivSubTitle>
                     <SubTitle>categoria</SubTitle>
                     <Pressable onPress={() => setOpenModal(true)}>
-                        <PlusCircle size={38} strokeWidth={2.5} />
+                        <svg xmlns="http://www.w3.org/2000/svg" width="38" height="38" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-circle"><circle cx="12" cy="12" r="10" /><path d="M8 12h8" /><path d="M12 8v8" /></svg>
                     </Pressable>
                 </DivSubTitle>
                 <DivCategorias>
@@ -89,7 +88,7 @@ export default function NovaTarefa({ closeModal }) {
                             }}>
                                 <Nome>{item.nome}</Nome>
                                 <Pressable onPress={() => Delete(item)}>
-                                    <Trash2 size={30} strokeWidth={2} />
+                                    <svg xmlns="http://www.w3.org/2000/svg" width="30" height="30" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-trash-2"><path d="M3 6h18" /><path d="M19 6v14c0 1-1 2-2 2H7c-1 0-2-1-2-2V6" /><path d="M8 6V4c0-1 1-2 2-2h4c1 0 2 1 2 2v2" /><line x1="10" x2="10" y1="11" y2="17" /><line x1="14" x2="14" y1="11" y2="17" /></svg>
                                 </Pressable>
                             </Categoria>
 
@@ -100,15 +99,23 @@ export default function NovaTarefa({ closeModal }) {
                     <Salvar onPress={NewTarefa}>
                         <Nome>Salvar</Nome>
                     </Salvar>
-                    <Pressable onPress={closeModal}>
-                        <XCircle size={68} strokeWidth={2.5} />
-                    </Pressable>
+                    <Apertavel onPress={closeModal}>
+                        <svg className='x' xmlns="http://www.w3.org/2000/svg" width="98" height="98" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-circle"><circle cx="12" cy="12" r="10" /><path d="m15 9-6 6" /><path d="m9 9 6 6" /></svg>
+                    </Apertavel>
                 </DivButtons>
             </Main >
         </Wrapper >
     )
 
 }
+const Apertavel = styled.Pressable`
+        position: relative;
+    .x{
+        position: absolute;
+        right: 1rem;
+        bottom: 1rem;
+    }
+`
 const Salvar = styled.Pressable`
     width: 12rem;
     height: 4rem;
@@ -122,6 +129,7 @@ const DivButtons = styled.View`
     width: 20rem;
     margin-top: 2rem;
     justify-content: space-between;
+    align-items: center;
 `
 const Nome = styled.Text`
     font-family: GochiHand_400Regular;
@@ -178,7 +186,7 @@ const Main = styled.View`
     background-color: #C6D1E6;
     width: 95%;
     height: 85%;
-    border-radius: 60px;
+    border-radius: 3rem 3rem 0 0;
     align-items: center;
     padding-bottom: 30px;
 `
