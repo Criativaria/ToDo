@@ -1,9 +1,9 @@
 import styled from 'styled-components/native'
 import NovaTarefa from '../components/novatarefa';
-import { useEffect, useId, useState } from 'react';
+import { useEffect, useState } from 'react';
 import { FlatList, Modal, Pressable } from 'react-native';
 import usestorage from '../hooks/usestorage';
-
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function Home() {
     const [openModal, setOpenModal] = useState(false);
@@ -20,11 +20,8 @@ export default function Home() {
         getTasks();
     }, [])
 
-    const HandleComponent = () => {
-        setTimeout(() => {
-            getTasks()
-            setOpenModal(false)
-        }, 0)
+    const HandleComponent = async () => {
+        setOpenModal(false)
     }
 
     const Delete = async (value) => {
@@ -53,7 +50,7 @@ export default function Home() {
                                 <P>{item.nome}</P>
                             </DivNome>
                             <Pressable onPress={() => Delete(item)}>
-                                <svg xmlns="http://www.w3.org/2000/svg" width="50" height="50" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-check"><path d="M20 6 9 17l-5-5" /></svg>
+                                <Ionicons name="checkmark" size={36} />
                             </Pressable>
                         </Tarefa>
                     }}>
@@ -63,7 +60,7 @@ export default function Home() {
 
 
             <DivPlus onPress={() => setOpenModal(true)}>
-                <svg xmlns="http://www.w3.org/2000/svg" width="98" height="98" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-plus-circle"><circle cx="12" cy="12" r="10" /><path d="M8 12h8" /><path d="M12 8v8" /></svg>
+                <Ionicons name="add-circle-outline" size={96} />
             </DivPlus>
         </Wrapper >
     )
@@ -71,47 +68,44 @@ export default function Home() {
 }
 const DivPlus = styled.Pressable`
     position: absolute;
-    bottom: 1rem;
-    right: 1rem;
+    bottom: 0;
+    right: 0;
 `
 
 const DivNome = styled.View`
     flex-direction: column;
-    padding-inline: 1.25rem;
-    width: 14rem;
+    padding-inline: 20px;
+    width: 224px;
     
 `
 const Categoria = styled.Text`
-    font-size: 1.5rem;
-    font-family: GochiHand_400Regular;
+    font-size: 24px;
     margin-top: 10px;
 `
 const P = styled.Text`
-    font-size: 2rem;
-    font-family: GochiHand_400Regular;
+    font-size: 32px;
 `
 const Tarefa = styled.View`
-    width: 20rem;
-    min-height: 5rem;
+    width: 320px;
+    min-height: 80px;
     height: fit-content;
-    border-radius: 3rem;
+    border-radius: 48px;
     flex-direction: row;
     align-items: center;
     justify-content: space-between;
-    padding-inline: 2rem;
-    margin-block: 0.5rem;
+    padding-inline: 32px;
+    margin-block: 8px;
     `
 const DivTarefas = styled.View`
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    height: 40rem;
+    height: 640px;
 `
 const Wrapper = styled.View`
     flex: 1;
 `
 const Titulo = styled.Text`
-    font-family: GochiHand_400Regular;
     font-size: 100px;
-    margin-inline: 2rem;
+    margin-inline: 32px;
 `

@@ -2,14 +2,14 @@ import styled from 'styled-components/native'
 import { Pressable } from 'react-native';
 import { useId, useState } from 'react';
 import useStorage from '../hooks/usestorage';
+import Ionicons from '@expo/vector-icons/Ionicons';
 
 export default function NovaCategoria({ closeModal, setNewCateg }) {
 
-
     const [texto, setTexto] = useState('');
     const [cor, setCor] = useState('');
-    const { saveCategorias } = useStorage();
-    const id = useId()
+    const { saveCategorias, getCategorias } = useStorage();
+    const id = useId();
 
     const cores = [
         "#F89CDF", "#A0D3EE", "#A479C6", "#FED468", "#B1CD5E"
@@ -51,7 +51,7 @@ export default function NovaCategoria({ closeModal, setNewCateg }) {
                         <Nome>Salvar</Nome>
                     </Salvar>
                     <Pressable onPress={closeModal}>
-                        <svg className='x' xmlns="http://www.w3.org/2000/svg" width="68" height="68" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" class="lucide lucide-x-circle"><circle cx="12" cy="12" r="10" /><path d="m15 9-6 6" /><path d="m9 9 6 6" /></svg>
+                        <Ionicons name="close" size={36} />
                     </Pressable>
                 </DivButtons>
             </Main >
@@ -62,29 +62,28 @@ export default function NovaCategoria({ closeModal, setNewCateg }) {
 const DivCores = styled.View`
     flex-direction: row;
     padding-top: 10px;
-    gap: 1rem;
+    gap: 16px;
 `
 const Cores = styled.Pressable`
-    width: 2rem;
-    height: 2rem;
-    border-radius: 2rem;
+    width: 32px;
+    height: 32px;
+    border-radius: 32px;
 `
 const Salvar = styled.Pressable`
-    width: 12rem;
-    height: 4rem;
-    border-radius: 3rem;
+    width: 192px;
+    height: 64px;
+    border-radius: 48px;
     background-color: white;
     align-items: center;
     justify-content: center;
 `
 const DivButtons = styled.View`
     flex-direction: row;
-    width: 20rem;
-    margin-top: 3rem;
+    width: 320px;
+    margin-top: 48px;
     justify-content: space-between;
 `
 const Nome = styled.Text`
-    font-family: GochiHand_400Regular;
     font-size: 25px;
 `
 
@@ -92,21 +91,18 @@ const DivInput = styled.View`
     padding-top: 30px;
 `
 const Linha = styled.View`
-    width: 17rem;
+    width: 272px;
     height: 5px;
     background-color: black;
     border-radius: 5px;
 `
 const Input = styled.TextInput`
-   outline: none;
-   width: 17rem;
-   height: 2rem;
-   font-family: GochiHand_400Regular;
+   width: 272px;
+   height: 32px;
    font-size: 30px;
 `
 const Title = styled.Text`
     font-size: 50px;
-    font-family: GochiHand_400Regular;
     padding-top: 20px;
 `
 const Main = styled.View`
@@ -123,4 +119,5 @@ const Wrapper = styled.View`
     justify-content: center;
     align-items: center;
     background-color: #00000040;
+    z-index: 100;
 `
