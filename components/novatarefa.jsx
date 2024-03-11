@@ -5,8 +5,8 @@ import { FlatList, Pressable, Modal } from 'react-native';
 import useStorage from '../hooks/usestorage';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function NovaTarefa({ closeModal }) {
-    const id = useId();
+export default function NovaTarefa({ closeModal, Reload }) {
+    const Id = useId();
     const { getCategorias, deleteCategorias, saveTarefas } = useStorage()
 
     const [openModal, setOpenModal] = useState(false);
@@ -30,15 +30,12 @@ export default function NovaTarefa({ closeModal }) {
 
     const HandleComponent = async () => {
         setOpenModal(false)
-        GetClass();
     }
     const OpenCateg = async () => {
         setOpenModal(true)
-        console.log(openModal)
     }
     async function Delete(value) {
         const newDados = await deleteCategorias("Categ", value);
-        console.log(newDados)
         setTimeout(() => {
             setDataCateg(newDados)
         }, 0)
@@ -47,26 +44,28 @@ export default function NovaTarefa({ closeModal }) {
     //tarefas
 
     const NewTarefa = () => {
-
         if (corCateg && nomeCateg && nomeTarefa) {
-            closeModal();
-
-            saveTarefas("Tarefas", {
+            let novaTarefa = {
                 cor: corCateg,
                 categoria: nomeCateg,
                 nome: nomeTarefa,
-                id: id
-            })
-
+                id: Id
+            }
+            saveTarefas("Tarefas", novaTarefa);
+            Reload(novaTarefa);
+            closeModal();
         }
     }
 
+    const addNewCateg = (newCateg) => {
+        setDataCateg(dataCateg => [...dataCateg, newCateg]);
+    }
 
     return (
         <Wrapper>
             <Main>
                 <Modal visible={openModal} transparent={true}>
-                    <NovaCategoria closeModal={HandleComponent} setNewCateg={setNewCateg} />
+                    <NovaCategoria closeModal={HandleComponent} setNewCateg={setNewCateg} Reload={addNewCateg} />
                 </Modal>
                 <Title>Nova Tarefa</Title>
                 <DivInput>
@@ -102,7 +101,7 @@ export default function NovaTarefa({ closeModal }) {
                         <Nome>Salvar</Nome>
                     </Salvar>
                     <Apertavel onPress={closeModal}>
-                        <Ionicons name="close" size={36} />
+                        <Ionicons name="close" size={90} />
                     </Apertavel>
                 </DivButtons>
             </Main >
@@ -135,6 +134,7 @@ const DivButtons = styled.View`
 `
 const Nome = styled.Text`
     font-size: 25px;
+    font-family: GochiHand_400Regular;
 `
 const Categoria = styled.Pressable`
     padding-inline: 32px;
@@ -164,6 +164,7 @@ const DivSubTitle = styled.View`
 `
 const SubTitle = styled.Text`
     font-size: 30px;
+    font-family: GochiHand_400Regular;
 `
 const Linha = styled.View`
     width: 272px;
@@ -174,10 +175,12 @@ const Input = styled.TextInput`
    width: 272px;
    height: 32px;
    font-size: 30px;
+   font-family: GochiHand_400Regular;
 `
 const Title = styled.Text`
     font-size: 50px;
     padding-top: 20px;
+    font-family: GochiHand_400Regular;
 `
 const Main = styled.View`
     background-color: #C6D1E6;

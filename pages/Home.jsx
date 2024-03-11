@@ -31,10 +31,14 @@ export default function Home() {
         }, 0)
     }
 
+    const AddNewTask = (newTask) => {
+        setTasks(Tasks => [...Tasks, newTask]);
+    }
+
     return (
         <Wrapper>
             <Modal visible={openModal} transparent={true}>
-                <NovaTarefa closeModal={HandleComponent} />
+                <NovaTarefa closeModal={HandleComponent} Reload={AddNewTask} />
             </Modal>
             <Titulo>to-do</Titulo>
 
@@ -81,9 +85,11 @@ const DivNome = styled.View`
 const Categoria = styled.Text`
     font-size: 24px;
     margin-top: 10px;
+    font-family: GochiHand_400Regular;
 `
 const P = styled.Text`
     font-size: 32px;
+    font-family: GochiHand_400Regular;
 `
 const Tarefa = styled.View`
     width: 320px;
@@ -108,4 +114,5 @@ const Wrapper = styled.View`
 const Titulo = styled.Text`
     font-size: 100px;
     margin-inline: 32px;
+    font-family: GochiHand_400Regular;
 `

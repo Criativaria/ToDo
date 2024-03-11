@@ -4,7 +4,7 @@ import { useId, useState } from 'react';
 import useStorage from '../hooks/usestorage';
 import Ionicons from '@expo/vector-icons/Ionicons';
 
-export default function NovaCategoria({ closeModal, setNewCateg }) {
+export default function NovaCategoria({ closeModal, setNewCateg, Reload }) {
 
     const [texto, setTexto] = useState('');
     const [cor, setCor] = useState('');
@@ -17,18 +17,14 @@ export default function NovaCategoria({ closeModal, setNewCateg }) {
 
     const CriarCateg = () => {
         closeModal()
-
-        saveCategorias("Categ", {
+        let NewCategoria = {
             nome: texto,
             cor: cor,
             id: id
-        });
-
-        setNewCateg({
-            nome: texto,
-            cor: cor,
-            id: id
-        })
+        }
+        saveCategorias("Categ", NewCategoria);
+        setNewCateg(NewCategoria)
+        Reload(NewCategoria)
     }
 
     return (
@@ -85,6 +81,7 @@ const DivButtons = styled.View`
 `
 const Nome = styled.Text`
     font-size: 25px;
+    font-family: GochiHand_400Regular;
 `
 
 const DivInput = styled.View`
@@ -100,10 +97,12 @@ const Input = styled.TextInput`
    width: 272px;
    height: 32px;
    font-size: 30px;
+   font-family: GochiHand_400Regular;
 `
 const Title = styled.Text`
     font-size: 50px;
     padding-top: 20px;
+    font-family: GochiHand_400Regular;
 `
 const Main = styled.View`
     background-color: #C6D1E6;
